@@ -113,7 +113,7 @@ The serial output includes Wi‑Fi status, geo lookup results, timezone matching
 
 ## License
 
-This repository does not currently include a license file. If you plan to redistribute or publish this project, add an appropriate open-source license and update this section.
+This repository does not currently include a license file.  It is open to all without restriction.  It would be nice to include a link in the code to this skeleton so others might find it and save a lot of their time creating it all over again.
 
 ## Related references
 
