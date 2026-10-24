@@ -28,7 +28,7 @@ void initTime()
     // Serial.printf("Comparing %s to %s\r\n", zones[i].name, loc.timezone);
     if (STRCMP(zones[i].name, loc.timezone)) {
       Serial.printf("Found a zone match: %s\r\n", zones[i].name);
-      Serial.println("Setting that zone and getting time.");
+      Serial.println("Using that zone and getting time.");
       Serial.flush();
       configTzTime(zones[i].zone, "pool.ntp.org");  // Use the env string from the match.
       delay(2000);
