@@ -1,4 +1,4 @@
-// Either the Boards level or Windows USB is having trouble putting all of the 
+// Either the Boards level or Windows USB is having trouble putting all of the
 //  Serial.prints onto the Serial monitor.  Therefore, there are some Serial.flush()
 //  statements here and there.  Without them, stuff gets lost.  Not sure why or where!
 
@@ -40,6 +40,17 @@ time_t TS_Epoch = 0, UTC;
 struct tm timeinfo;
 char   chBuffer[100];    // Work area for sprintf, etc.
 String sVer;
+
+int ihourlyBrilliance[] = {
+  //0   1    2     3    4    5
+  40,  20,  20,   20,  20,  20,  //  0- 5
+  //6   7    8     9   10   11
+  30,  40,  50,   60, 80,  100,  //  6-11
+  //12  13   14   15   16   17
+  120, 140, 160, 160, 160, 160,  // 12-17
+  //18  19   20   21   22   23
+  140, 120, 100,  80,  60,  50   // 18-23
+};
 
 /* Just to remind myself when I forget!
 

@@ -21,8 +21,10 @@ void setup()
   tft.setRotation(3);
   tft.fillScreen(SpriteDarkBlueBG); // Clear screen to navy background
 
+#if defined TFT_BL
   ledcAttach(TFT_BL, 5000, 8);  // PWM timer automatically assigned.
   ledcWrite(TFT_BL, 120);       // Turn the display on medium.
+#endif
 
   spriteBG.createSprite(tft.width(), tft.height());  // The big kahuna. The big cheese!
   spriteBG.setSwapBytes(false);
@@ -44,28 +46,6 @@ void setup()
   Serial.println("Initializing WiFi"); Serial.flush();
   initWiFi();
   Serial.println(); Serial.println("Done with initWifi\r\n"); Serial.flush();
-
-  /* Testing */
-  //#include <WiFiClientSecure.h>
-  //
-  //  WiFiClientSecure client;
-  //  client.setInsecure();
-  //  IPAddress ip;
-  //  uint32_t msStart = millis();
-  //  bool result = WiFi.hostByName("ipapi.co", ip);
-  //  Serial.printf("DNS lookup took %lu ms\r\n",
-  //                millis() - msStart);
-  //  Serial.println(ip);
-  //  Serial.flush();
-  //
-  //  msStart = millis();
-  //  bool rc = client.connect(ip, 443);
-  //  Serial.printf("connect() returned after %lu ms\r\n",
-  //                millis() - msStart);
-  //  Serial.flush();
-  //  Serial.printf("Result = %s\r\n",
-  //                rc ? "SUCCESS" : "FAIL"); Serial.flush();
-  /* End Testing */
 
   spriteBG.fillSprite(SpriteDarkBlueBG);
   spriteBG.drawString("ESPTouch Broadcast Test",
@@ -89,6 +69,8 @@ void setup()
 
   initTime();
   Serial.println("Done with initTime"); Serial.flush();
+  getLocalTime(&timeinfo);  // This is what I was after.  Local time!
+  Adjust_Brightness(timeinfo.tm_hour);
 
   spriteBG.setTextPadding(0);
 
@@ -111,6 +93,10 @@ void loop()
   iHour  = timeinfo.tm_hour;
   iMin   = timeinfo.tm_min;
   iSec   = timeinfo.tm_sec;
+
+  // Adjust brightness based on hour.
+  if (iPrev_Hour != iHour && iMin == 0 && iSec == 0)
+    Adjust_Brightness(iHour);
 
   // Here is where you write your repeating procedure.
 
@@ -140,9 +126,13 @@ void doMyCode()
     spriteBG.setFreeFont(FSB24);
     strftime(chBuffer, sizeof(chBuffer), "%T", &timeinfo);
 
+    // Boring
     // spriteBG.setTextColor(TFT_YELLOW, SpriteDarkBlueBG);  // Stable, yellow on blue.
-    spriteBG.setTextColor(RGB565(random(80, 256), random(80, 256), random(80, 256)),
-                          SpriteDarkBlueBG);
+    // Nutz!
+    // spriteBG.setTextColor(RGB565(random(80, 256), random(80, 256), random(80, 256)),
+    //                       SpriteDarkBlueBG);
+    // Reddish
+    spriteBG.setTextColor(RGB565(255, 80, 80), SpriteDarkBlueBG);
     spriteBG.drawString(chBuffer,
                         spriteBG.width() / 2, spriteBG.height() / 3 * 2);
 

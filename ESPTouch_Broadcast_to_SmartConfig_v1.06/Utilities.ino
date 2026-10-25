@@ -309,3 +309,14 @@ void printVers()
   Serial.printf("Compiled on %s at %s.\r\n", __DATE__, __TIME__);
   Serial.flush();
 }
+/*******************************************************************************************/
+void Adjust_Brightness(int iHour)
+/*******************************************************************************************/
+{
+#if defined TFT_BL
+  // Only try this if there is a BL pin defined.
+  Serial.printf("Setting brightness to %d for hour %02d\r\n",
+                ihourlyBrilliance[iHour], iHour);
+  ledcWrite(TFT_BL, ihourlyBrilliance[iHour]);
+#endif
+}
