@@ -2,7 +2,7 @@
 
 A lightweight ESP32-based clock project that uses ESPTouch SmartConfig to join Wi‑Fi, looks up the device's approximate geographic location from the IP address, matches that location to a timezone table, and then syncs the current time over NTP. The sketch is intentionally written as a skeleton so you can reuse the setup flow and then add your own display behavior or features.
 
-This project is centered around the Arduino/ESP32 ecosystem and is designed to work well with an ESP32 display board such as the T‑Display S3, using `TFT_eSPI` for graphics.
+This project is centered around the Arduino/ESP32 ecosystem and is designed to work well with an ESP32 display board such as the T‑Display S3, using `TFT_eSPI` for graphics.  There are two versions uploaded.  One uses only tft_espi for output of all information to the screen.  The other version uses OpenFontRender for output of the time screen texts.  This demonstrates how one binary, included TTF file can be used at multiple font sizes and colors to output to the screen.  It is easier but somewhat slower.  For this demo, it does not matter.  It still does everything that is needed quickly enough.
 
 ## Features
 
